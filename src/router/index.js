@@ -1,19 +1,39 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: '/', // Redirect root to listar
+    redirect: '/listar'
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/listar',
+    name: 'listar',
+    component: () => import('../views/EstudianteListar.vue')
+  },
+  {
+    path: '/buscar',
+    name: 'buscar',
+    component: () => import('../views/EstudianteBuscar.vue')
+  },
+  {
+    path: '/guardar',
+    name: 'guardar',
+    component: () => import('../views/EstudianteGuardar.vue')
+  },
+  {
+    path: '/actualizar',
+    name: 'actualizar',
+    component: () => import('../views/EstudianteActualizar.vue')
+  },
+  {
+    path: '/parcial',
+    name: 'parcial',
+    component: () => import('../views/EstudianteParcial.vue')
+  },
+  {
+    path: '/eliminar',
+    name: 'eliminar',
+    component: () => import('../views/EstudianteEliminar.vue')
   }
 ]
 
