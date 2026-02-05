@@ -9,7 +9,6 @@ const generarToken = async (username = "admin", password = "admin") => {
     };
     try {
         const response = await axios.get(`/auth/token?user=${username}&password=${password}`);
-        if (response.data && response.data.token) {
         const data = response.data;
         if (data) {
             if (typeof data === 'string') {
