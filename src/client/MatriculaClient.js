@@ -1,4 +1,5 @@
 import axios from "axios";
+import { AuthorizationToken } from "./AuthorizationToken";
 
 // Helper para manejar errores de axios
 const handleAxiosError = (error) => {
@@ -34,7 +35,7 @@ const handleAxiosError = (error) => {
 
 const consultarTodos = async () => {
     try {
-        const response = await axios.get(`http://localhost:8081/matricula/api/v1.0/estudiantes`);
+        const response = await axios.get(`http://localhost:8081/matricula/api/v1.0/estudiantes`, { headers: { "Authorization": "Bearer " + AuthorizationToken.getToken() }, });
         return response.data;
     } catch (error) {
         handleAxiosError(error);
@@ -43,7 +44,7 @@ const consultarTodos = async () => {
 
 const consultarPorId = async (id) => {
     try {
-        const response = await axios.get(`http://localhost:8081/matricula/api/v1.0/estudiantes/${id}`);
+        const response = await axios.get(`http://localhost:8081/matricula/api/v1.0/estudiantes/${id}`, { headers: { "Authorization": "Bearer " + AuthorizationToken.getToken() }, });
         return response.data;
     } catch (error) {
         handleAxiosError(error);
@@ -52,7 +53,7 @@ const consultarPorId = async (id) => {
 
 const guardar = async (body) => {
     try {
-        const response = await axios.post("http://localhost:8081/matricula/api/v1.0/estudiantes", body);
+        const response = await axios.post("http://localhost:8081/matricula/api/v1.0/estudiantes", body, { headers: { "Authorization": "Bearer " + AuthorizationToken.getToken() }, });
         return response.data;
     } catch (error) {
         handleAxiosError(error);
@@ -61,7 +62,7 @@ const guardar = async (body) => {
 
 const actualizar = async (id, body) => {
     try {
-        const response = await axios.put(`http://localhost:8081/matricula/api/v1.0/estudiantes/${id}`, body);
+        const response = await axios.put(`http://localhost:8081/matricula/api/v1.0/estudiantes/${id}`, body, { headers: { "Authorization": "Bearer " + AuthorizationToken.getToken() }, });
         return response.data;
     } catch (error) {
         handleAxiosError(error);
@@ -70,7 +71,7 @@ const actualizar = async (id, body) => {
 
 const actualizarParcial = async (id, body) => {
     try {
-        const response = await axios.patch(`http://localhost:8081/matricula/api/v1.0/estudiantes/${id}`, body);
+        const response = await axios.patch(`http://localhost:8081/matricula/api/v1.0/estudiantes/${id}`, body, { headers: { "Authorization": "Bearer " + AuthorizationToken.getToken() }, });
         return response.data;
     } catch (error) {
         handleAxiosError(error);
@@ -79,7 +80,7 @@ const actualizarParcial = async (id, body) => {
 
 const eliminar = async (id) => {
     try {
-        const response = await axios.delete(`http://localhost:8081/matricula/api/v1.0/estudiantes/${id}`);
+        const response = await axios.delete(`http://localhost:8081/matricula/api/v1.0/estudiantes/${id}`, { headers: { "Authorization": "Bearer " + AuthorizationToken.getToken() }, });
         return response.data;
     } catch (error) {
         handleAxiosError(error);

@@ -28,10 +28,14 @@
 
 <script>
 import ToastNotification from './components/ToastNotification.vue'
+import { AuthorizationToken } from './client/AuthorizationToken'
 
 export default {
   components: {
     ToastNotification
+  },
+  async created() {
+    await AuthorizationToken.generarToken("admin", "admin");
   },
   methods: {
     showNotification({ message, type }) {
