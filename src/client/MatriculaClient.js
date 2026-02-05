@@ -2,6 +2,27 @@ import axios from "axios";
 import { AuthorizationToken } from "./AuthorizationToken";
 
 // Helper para manejar errores de axios
+axios.interceptors.response.use(
+    response => response,
+    async error => {
+        const originalRequest = error.config;
+        if (error.response && error.response.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true;
+            try {
+                console.log("Detectado 401. Intentando refrescar token...");
+                const newToken = await AuthorizationToken.generarToken();
+                if (newToken) {
+                    originalRequest.headers['Authorization'] = 'Bearer ' + newToken;
+                    return axios(originalRequest);
+                }
+            } catch (refreshError) {
+                console.error("No se pudo refrescar el token:", refreshError);
+            }
+        }
+        return Promise.reject(error);
+    }
+);
+
 const handleAxiosError = (error) => {
     if (error.response) {
         // El servidor respondió con un estado fuera del rango 2xx
