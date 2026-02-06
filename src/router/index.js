@@ -10,6 +10,11 @@ const routes = [
     }
   },
   {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/LoginView.vue')
+  },
+  {
     path: '/listar',
     name: 'listar',
     component: () => import('../views/EstudianteListar.vue'),
@@ -78,7 +83,10 @@ router.beforeEach((to, from, next) => {
 
   if (requiereAutorizacion && !estaLogueado) {
     console.log('No autorizado')
-    next({ name: 'login' })
+    next({
+      name: 'login',
+      query: { redirect: to.fullPath }
+    })
   } else {
     console.log('Autorizado')
     next()
